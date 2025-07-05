@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Tecsup</title>
+  <link rel="stylesheet" href="bebidas.css">
+</head>
+<body>
+  <!-- Barra superior -->
+  <header class="barra-menu">
+    <h1>Cafetería TECSUP</h1>
+    <nav>
+      <a href="#">INICIO</a>
+      <a href="menu.html">MENU</a>
+      <a href="#">INICIAR SESIÓN</a>
+    </nav>
+  </header>
+
+  <!-- Encabezado buscador y usuario -->
+  <header>
+    <h1><span style="color:#00AEEF;">Tec</span>sup</h1>
+    <input type="text" placeholder="Buscar">
+    <div class="iconos">
+      <span>🔊</span>
+      <span>👤</span>
+      <span>🛒</span>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    <aside>
+      <h3>Categorías</h3>
+      <ul>
+        <li>Snacks</li>
+        <li>Bebidas</li>
+        <li>Postres</li>
+        <li>Menú</li>
+      </ul>
+    </aside>
+
+    <section class="contenido">
+      <h2>GASEOSAS</h2>
+
+      <div class="productos">
+        <!-- productos generados por JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ✅ Burbuja flotante del carrito -->
+  <div class="burbuja-carrito" id="burbujaCarrito">
+    🛒<span id="contadorCarrito">0</span>
+  </div>
+
+  <!-- 📦 Panel flotante del carrito -->
+  <div class="panel-carrito" id="panelCarrito">
+    <h3>🛒 Carrito</h3>
+    <div id="carrito-lista"></div>
+    <div class="totales">
+      <p id="subtotal">Subtotal: S/ 0.00</p>
+      <p id="igv">IGV (18%): S/ 0.00</p>
+      <p id="carrito-total">Total: S/ 0.00</p>
+    </div>
+    <div class="boton-ver-carrito">
+      <a href="carrito.html" class="ir-carrito-btn">Ver carrito completo 🛒</a>
+    </div>
+  </div>
+
+  <script src="bebidas.js"></script>
+</body>
+</html>

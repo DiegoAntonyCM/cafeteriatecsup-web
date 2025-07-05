@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="carrito.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefbfc;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      padding: 10px 30px;
+      border-bottom: 2px solid #ccc;
+    }
+
+    header h2 span {
+      color: #337ccf;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: #337ccf;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #4397d2;
+      color: white;
+      padding: 30px 40px;
+    }
+
+    .cart-icon {
+      font-size: 2rem;
+      position: relative;
+    }
+
+    .burbuja {
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 3px 7px;
+      font-size: 0.75rem;
+    }
+
+    /* Main */
+    .container {
+      display: flex;
+      gap: 20px;
+      padding: 30px 40px;
+      flex-wrap: wrap;
+    }
+
+    /* Productos */
+    .productos {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .productos h2 {
+      font-size: 1.5em;
+      color: #3a76e0;
+      margin-bottom: 15px;
+    }
+
+    #lista-productos {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #lista-productos .item {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      gap: 10px;
+    }
+
+    .item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .item-details {
+      flex-grow: 1;
+    }
+
+    .item-details h4 {
+      margin: 0;
+      font-size: 1em;
+      color: #3a76e0;
+    }
+
+    .item-details p {
+      margin: 3px 0;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    /* Resumen */
+    .resumen {
+      flex: 1;
+      min-width: 280px;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .resumen h2 {
+      color: #3a76e0;
+    }
+
+    .detalle {
+      margin-top: 15px;
+      font-size: 0.95em;
+    }
+
+    .detalle p {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+    }
+
+    h3 {
+      margin-top: 25px;
+      font-size: 1.2em;
+      color: #2b6ed7;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Botones */
+    button.continuar {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #26b226;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+    }
+
+    button.pagar {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #3a76e0;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+.item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+      .hero h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>Cafetería <span>TECSUP</span></h2>
+    <nav>
+      <a href="index.html">INICIO</a>
+      <a href="menu.html">MENU</a>
+      <a href="#">INICIAR SESIÓN</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Carrito de Compras</h1>
+    <div class="cart-icon">
+      🛒<span id="contador-carrito" class="burbuja">0</span>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="productos">
+      <h2>Tus Productos (<span id="cantidad">0</span>)</h2>
+      <div id="lista-productos"></div>
+    </section>
+
+    <section class="resumen">
+      <h2>Resumen de Pedidos</h2>
+      <div class="detalle">
+        <p>Subtotal (<span id="subcantidad">0 productos</span>) <span id="subtotal">S/ 0.00</span></p>
+        <p>Envío <span>Gratis</span></p>
+        <p>Impuestos <span id="impuestos">S/ 0.00</span></p>
+      </div>
+      <h3>Total <span id="total">S/ 0.00</span></h3>
+      <button class="continuar" onclick="window.location.href='menu.html'">Continuar comprando</button>
+      <button class="pagar">Proceder al pago</button>
+    </section>
+  </main>
+
+<script src="carrito.js"></script>
+</body>
+</html>

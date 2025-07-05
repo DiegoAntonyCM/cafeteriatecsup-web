@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión - Cafetería TECSUP</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <style>
+    body {
+      background-color: #fefbfc;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .login-card {
+      max-width: 400px;
+      margin: auto;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      background-color: #fff;
+    }
+    .login-btn {
+      background-color: #00AEEF;
+      border: none;
+    }
+    .login-btn:hover {
+      background-color: #0095d9;
+    }
+    .google-btn {
+      background-color: #fff;
+      color: #444;
+      border: 1px solid #ccc;
+    }
+    .google-btn:hover {
+      background-color: #f2f2f2;
+    }
+    .google-icon {
+      height: 20px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="login-card">
+      <h3 class="text-center mb-4 text-primary">Iniciar Sesión</h3>
+
+      <!-- Formulario clásico -->
+      <form onsubmit="return false;">
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" placeholder="ejemplo@tecsup.edu.pe" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" placeholder="********" required>
+        </div>
+
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn login-btn text-white">Iniciar Sesión</button>
+        </div>
+      </form>
+
+      <div class="text-center text-muted mb-2">o</div>
+
+      <!-- Google login -->
+      <div class="d-grid">
+        <button type="button" id="googleLogin" class="btn google-btn d-flex justify-content-center align-items-center">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="google-icon" alt="Google">
+          Iniciar sesión con Google
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase configuración -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA4n8BcEUs5a1gtBIXidl2rolk-pYRdcs8",
+      authDomain: "cafeteriatecsup.firebaseapp.com",
+      projectId: "cafeteriatecsup",
+      appId: "1:610591799048:web:5c1553cbb180d1610f1ebd"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Lógica Google login -->
+  <script>
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    document.getElementById('googleLogin').addEventListener('click', () => {
+      firebase.auth().signInWithPopup(provider)
+        .then(result => {
+          const user = result.user;
+          const email = user.email;
+
+          if (email.endsWith('@tecsup.edu.pe')) {
+            alert("Bienvenido, " + user.displayName);
+            window.location.href = "menu.html";
+          } else {
+            alert("Solo se permite acceso con correos @tecsup.edu.pe");
+            firebase.auth().signOut();
+          }
+        })
+        .catch(error => {
+          console.error("Error de autenticación:", error);
+          alert("Error: " + error.message);
+        });
+    });
+  </script>
+
+</body>
+</html>
